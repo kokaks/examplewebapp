@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SavedRouteImport } from './routes/saved'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ResultsDestIdRouteImport } from './routes/results.$destId'
+import { Route as SpotSpotIdRouteImport } from './routes/spot.$spotId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResultsDestIdRoute = ResultsDestIdRouteImport.update({
+  id: '/results/$destId',
+  path: '/results/$destId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpotSpotIdRoute = SpotSpotIdRouteImport.update({
+  id: '/spot/$spotId',
+  path: '/spot/$spotId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/saved': typeof SavedRoute
+  '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
+  '/results/$destId': typeof ResultsDestIdRoute
+  '/spot/$spotId': typeof SpotSpotIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/saved': typeof SavedRoute
+  '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
+  '/results/$destId': typeof ResultsDestIdRoute
+  '/spot/$spotId': typeof SpotSpotIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/saved': typeof SavedRoute
+  '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
+  '/results/$destId': typeof ResultsDestIdRoute
+  '/spot/$spotId': typeof SpotSpotIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/saved'
+    | '/search'
+    | '/settings'
+    | '/results/$destId'
+    | '/spot/$spotId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/saved'
+    | '/search'
+    | '/settings'
+    | '/results/$destId'
+    | '/spot/$spotId'
+  id:
+    | '__root__'
+    | '/'
+    | '/saved'
+    | '/search'
+    | '/settings'
+    | '/results/$destId'
+    | '/spot/$spotId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SavedRoute: typeof SavedRoute
+  SearchRoute: typeof SearchRoute
+  SettingsRoute: typeof SettingsRoute
+  ResultsDestIdRoute: typeof ResultsDestIdRoute
+  SpotSpotIdRoute: typeof SpotSpotIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/results/$destId': {
+      id: '/results/$destId'
+      path: '/results/$destId'
+      fullPath: '/results/$destId'
+      preLoaderRoute: typeof ResultsDestIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/spot/$spotId': {
+      id: '/spot/$spotId'
+      path: '/spot/$spotId'
+      fullPath: '/spot/$spotId'
+      preLoaderRoute: typeof SpotSpotIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SavedRoute: SavedRoute,
+  SearchRoute: SearchRoute,
+  SettingsRoute: SettingsRoute,
+  ResultsDestIdRoute: ResultsDestIdRoute,
+  SpotSpotIdRoute: SpotSpotIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
